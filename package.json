@@ -1,0 +1,36 @@
+{
+  "name": "vite-demo",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "start": "npm run dev",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "amfe-flexible": "^2.2.1",
+    "lib-flexible": "^0.3.2",
+    "vant": "3",
+    "vue": "^3.2.25",
+    "vue-router": "4",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.0.0",
+    "autoprefixer": "^10.4.2",
+    "glob": "^7.2.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "postcss-px-to-viewport": "^1.1.1",
+    "postcss-pxtorem": "^4.0.1",
+    "vite": "^2.7.2",
+    "vite-plugin-style-import": "^1.4.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "Android >= 4.0",
+    "iOS >= 7"
+  ]
+}
