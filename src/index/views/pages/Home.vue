@@ -1,30 +1,65 @@
 <template>
   <div class="wrapper">
-    <img alt="Vue logo" src="@/assets/img/logo.png" />
-    <HelloWorld :msg="msg"/>
-    <div class="btn-wrapper" @click="goAbout">关于</div>
+    <m-nav-bar></m-nav-bar>
+
+    <div class="content">
+      <van-grid :border="false" :column-num="2" :gutter="16">
+        <van-grid-item
+          v-for="item in distributeType"
+          :key="item.type"
+          :text="item.name"
+          class="grid-item"
+          @click="handleGridClick(item.type)">
+        </van-grid-item>
+      </van-grid>
+    </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, defineAsyncComponent, ref } from 'vue'
-import {useRoute, useRouter} from 'vue-router'
+import { defineComponent, defineAsyncComponent, reactive, toRefs } from 'vue'
+import {useRouter} from 'vue-router'
+import { Grid, GridItem } from 'vant'
 export default defineComponent({
   components: {
-    HelloWorld: defineAsyncComponent(()=> import('@/components/HelloWorld.vue'))
+    mNavBar: defineAsyncComponent(()=> import('@/components/navBar')),
+    [Grid.name]: Grid,
+    [GridItem.name]: GridItem
   },
   setup() {
-    const msg = ref('Home 页面')
-    const route = useRoute();
     const router = useRouter();
-    console.log(route)
+    const homeState = reactive({
+      distributeType: [
+        {
+          name: '呼叫1',
+          icon: "",
+          type: 'materialDelivery'
+        },
+        {
+          name: "呼叫2",
+          icon: "",
+          type: 'receiveWarehousing'
+        },
+        {
+          name: '呼叫3',
+          icon: "",
+          type: 'callEmptyCar'
+        },
+        {
+          name: "呼叫4",
+          icon: "",
+          type: 'pointToPointCall'
+        }
+      ]
+    })
 
-    const goAbout = ()=> {
-      router.push('/about')
+    const handleGridClick = (type)=> {
+      console.log('handleGridClick type = ', type)
+      router.push({ path: `/${type}`})
     }
     return {
-      msg,
-      goAbout
+      ...toRefs(homeState),
+      handleGridClick
     }
   },
 })
@@ -46,6 +81,21 @@ export default defineComponent({
       border-radius: 4px;
       font-size: 14px;
       color: #fff;
+      position: sticky;
+      position: -webkit-sticky;
+      top: 0px;
+      z-index: 100;
     }
+  }
+</style>
+
+<style lang="less">
+  .grid-item {
+      .van-grid-item__content {
+        background: #f56;
+      }
+      .van-grid-item__text {
+        color: #fff;
+      }
   }
 </style>
