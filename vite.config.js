@@ -27,14 +27,25 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src') // 设置 `@` 指向 `src` 目录
-    }
+    },
+    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue']
   },
   base: './', // 设置打包路径
   server: {
     port: 3000,
     host: '0.0.0.0',
     open: false,
-    cors: true // 允许跨域
+    cors: true, // 允许跨域
+    proxy: {
+      '/api/public': {
+        target: 'http://localhost.api.com',
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+            '^/api/public': 'public/'
+        }
+      }
+    }
   },
   build: {
     rollupOptions: {
